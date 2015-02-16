@@ -2,7 +2,7 @@ require 'geocoder'
 
 module Sunlight
   class Congress
-    class Legislator
+    class Legislator < CongressApi
 
       SEARCH_ATTRIBUTES = [:first_name, :middle_name, :last_name, :name_suffix,
                           :nickname, :state, :state_name, :state_rank, :party,
@@ -44,6 +44,11 @@ module Sunlight
           encode_uri('legislators/locate', options)
         end
 
+        def all
+          response = Net::HTTP.get_response(find_uri)
+          create_from_response(response)
+        end
+
         def find(query)
           if query.is_a?(String)
             response = Net::HTTP.get_response(find_uri(query: query))
@@ -66,24 +71,6 @@ module Sunlight
           encode_uri('legislators', options)
         end
 
-        def encode_uri(location, options)
-          uri = URI("#{BASE_URI}/#{location}")
-          uri.query = URI.encode_www_form(options.merge(apikey: '6d4acf5a753c40e1824857bb12679d89'))
-
-          uri
-        end
-
-        def create_from_response(response)
-          json = JSON.parse(response.body)
-
-          if results = json['results']
-            results.map do |legislator_attrs|
-              self.new(legislator_attrs)
-            end
-          elsif errors = json['error']
-            json
-          end
-        end
       end
     end
   end

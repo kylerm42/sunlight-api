@@ -27,13 +27,14 @@ Sunlight::Congress::Legislator.find_by_state_rank('senior') # All legislators wi
 ```
 The ```find``` method accepts either a string or hash of parameters. Strings will only query the first, middle, last, and nicknames of legislators. You can also ```find_by_``` certain attributes. To see a list of accepted attributes (also applies to parameters passed into the ```find``` method), [look here](https://sunlightlabs.github.io/congress/legislators.html)
 
+By default, results are capped to the first 20 legislators. To overcome this, pass in the ```per_page: 'all'``` option. But keep in mind that this option automatically sets ```in_office: true```. Alternatively, you can pass a ```page: X``` option to get more legislators.
+
 Legislator location and searching methods return an array of ```Legislator``` objects
 ```ruby
 legislators = Sunlight::Congress::Legislator.find(gender: 'F', party: 'R')
 legislators #=> [#<Sunlight::Congress::Legislator:0x007f8fb7834b88 @bioguide_id="E000295", @birthday="1970-07-01", @chamber="senate"...>, #<Sunlight::Congress::Legislator:0x007f8fb58b15e0 @bioguide_id="C001105", @birthday="1959-06-30", @chamber="house"...>, ...]
 legislators[0].office #=> "825 B&c Hart Senate Office Building"
 ```
-
 
 ## Installation
 
