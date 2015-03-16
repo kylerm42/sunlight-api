@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "sunlight-api"
   spec.version       = Sunlight::VERSION
   spec.authors       = ["Kyle Moore"]
-  spec.email         = ["kylerm42@gmail.com"]
+  spec.email         = ["kylerm42code@gmail.com"]
   spec.summary       = %q{Gem for interacting with various Sunlight Foundation APIs}
   spec.homepage      = "https://github.com/kylerm42/sunlight-api"
   spec.license       = "MIT"
